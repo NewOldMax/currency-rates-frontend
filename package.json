@@ -1,0 +1,96 @@
+{
+  "name": "react-browserify-spa-seed",
+  "version": "0.0.1",
+  "description": "Seed project for React, Browserify, Rework SPAs",
+  "main": "src/app.jsx",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:mgonto/react-browserify-spa-seed.git"
+  },
+  "authors": [
+    "Martin Gontovnikas <martin@gon.to> (http://gon.to/)"
+  ],
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015",
+            "react",
+            "stage-2"
+          ]
+        }
+      ]
+    ]
+  },
+  "scripts": {
+    "start": "npm run build && serve .",
+    "build": "npm run build-js && npm run build-css && npm run copy-fonts && npm run copy-images",
+    "build-prod": "npm run build-js-prod && npm run build-css && npm run copy-fonts && npm run copy-images",
+    "watch": "npm run watch-js & npm run watch-css & serve .",
+    "test": "npm run lint -s && npm run build",
+    "copy-fonts": "cp -R -f src/assets/fonts/ build/",
+    "copy-images": "cp -R -f src/assets/img/ build/",
+    "build-css": "lessc --relative-urls src/assets/less/app.less > build/build.css",
+    "build-js": "browserify -i reactstrap-tether --extension=.jsx --extension=.js src/app.jsx | uglifyjs > build/build.js",
+    "build-js-prod": "browserify -i reactstrap-tether -g [envify --NODE_ENV 'production'] --extension=.jsx --extension=.js src/app.jsx | uglifyjs > build/build.js",
+    "watch-js": "watchify -i reactstrap-tether --extension=.jsx --extension=.js src/app.jsx -o build/build.js --debug --verbose --poll=50",
+    "watch-css": "nodemon -e less --ignore build/build.css --exec 'npm run build-css'",
+    "lint-eslint": "eslint .",
+    "lint-jscs": "jscs .",
+    "lint": "npm run lint-eslint && npm run lint-jscs"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mgonto/react-browserify-spa-seed/issues"
+  },
+  "homepage": "https://github.com/mgonto/react-browserify-spa-seed",
+  "dependencies": {
+    "bootstrap": "4.0.0-alpha.6",
+    "classnames": "2.2.5",
+    "flux": "3.1.2",
+    "jwt-payload-decoder": "1.2.4",
+    "less": "2.7.1",
+    "material-ui": "0.19.1",
+    "moment": "2.18.1",
+    "object-assign": "4.1.1",
+    "object-hash": "^1.1.8",
+    "promise-polyfill": "6.0.2",
+    "prop-types": "15.5.10",
+    "react": "15.6.1",
+    "reactstrap": "4.8.0",
+    "react-addons-transition-group": "15.6.0",
+    "react-addons-css-transition-group": "15.6.0",
+    "react-dom": "15.6.1",
+    "react-icons": "2.2.5",
+    "react-material-ui-form-validator": "0.5.0",
+    "react-router": "3.0.5",
+    "recharts": "0.22.4",
+    "uuid": "3.1.0"
+  },
+  "devDependencies": {
+    "babelify": "7.3.0",
+    "browser-sync": "2.17.5",
+    "browserify": "13.1.0",
+    "nodemon": "1.11.0",
+    "rework": "1.0.1",
+    "rework-npm": "1.0.0",
+    "rework-npm-cli": "0.1.1",
+    "serve": "1.4.0",
+    "uglify-js": "2.7.3",
+    "watchify": "3.7.0",
+    "bufferutil": "1.2.1",
+    "utf-8-validate": "1.2.1",
+    "babel-preset-react": "6.16.0",
+    "babel-preset-es2015": "6.16.0",
+    "babel-preset-stage-2": "6.16.0",
+    "envify": "3.4.1",
+    "babel-eslint": "^7.1.1",
+    "eslint": "^3.11.1",
+    "eslint-config-airbnb": "^13.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "2.2.3",
+    "eslint-plugin-react": "^6.8.0"
+  }
+}

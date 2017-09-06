@@ -1,0 +1,79 @@
+@import (less) "../../../node_modules/bootstrap/dist/css/bootstrap.css";
+
+@background_body: color("#FAFAFA");
+
+@error_color: color("#EF5350");
+
+* {
+    font-family: 'Roboto', sans-serif;
+}
+
+body, html {
+    background: @background_body;
+}
+
+b, strong, label, th {
+    font-weight: 500;
+}
+
+.error-box {
+    background: @error_color;
+    color: #fff;
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    line-height: 16px;
+    opacity: 0;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    z-index: 2;
+    &.open {
+        opacity: 1;
+    }
+}
+
+.make-magic, .make-magic:before, .make-magic:after {
+    -webkit-transition: all 300ms !important;
+    -moz-transition: all 300ms !important;
+    -ms-transition: all 300ms !important;
+    -o-transition: all 300ms !important;
+    transition: all 300ms !important;
+}
+
+#left-menu {
+    z-index: 2;
+    a {
+        color: #545454;
+        font-weight: 500;
+        &.active {
+            color: #232323;
+        }
+    }
+}
+
+#main-container {
+    padding-left: 150px;
+    #main-content {
+        padding: 16px;
+    }
+}
+
+.has-danger {
+    .form-control-danger {
+        background-image: none;
+    }
+}
+
+select {
+    &.form-control {
+        &:not([size]) {
+            &:not([multiple]) {
+                height: calc(2.25rem);
+            }
+        }
+    }
+}
+
+.modal-dialog {
+    max-width: 900px;
+}

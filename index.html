@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0" />
+
+  <title>Currency Rates</title>
+  
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&amp;subset=cyrillic,greek,latin-ext" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/build/build.css">
+</head>
+<body>
+  <!-- content section -->
+  <section id="loader">
+    <style type="text/css">
+      .loader {
+        position: absolute;
+        width: 100px;
+        top: 50%;
+        left: 50%;
+        margin-top: -50px;
+        margin-left: -50px;
+      }
+      .loader:before {
+        content: '';
+        display: block;
+        padding-top: 100%;
+      }
+
+      .circular {
+        animation: rotate 2s linear infinite;
+        height: 100%;
+        transform-origin: center center;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+      }
+
+      .path {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+        animation: dash 1.5s ease-in-out infinite;
+        stroke-linecap: round;
+        stroke: #008891;
+      }
+
+      @keyframes rotate {
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      @keyframes dash {
+        0% {
+          stroke-dasharray: 1, 200;
+          stroke-dashoffset: 0;
+        }
+        50% {
+          stroke-dasharray: 89, 200;
+          stroke-dashoffset: -35px;
+        }
+        100% {
+          stroke-dasharray: 89, 200;
+          stroke-dashoffset: -124px;
+        }
+      }
+    </style>
+    <div class="loader">
+      <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+      </svg>
+    </div>
+  </section>
+  <section id="content">
+  </section>
+
+  <!-- Initialize SPA -->
+  <script type="text/javascript" src="/build/build.js"></script>
+  
+  <script type="text/javascript">
+    window.addEventListener("message", setJWT, false);
+
+    window.win = null;
+    function setJWT(event) {
+        if (!event.data.token && !event.data.refreshToken) {
+            return;
+        }
+        localStorage.setItem('jwt', event.data.token);
+        localStorage.setItem('refreshToken', event.data.refreshToken);
+        window.win.close();
+        location.href = '/';
+    }
+  </script>
+</body>
+</html>
