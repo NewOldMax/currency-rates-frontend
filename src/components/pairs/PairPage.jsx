@@ -245,7 +245,7 @@ class PairPage extends React.Component {
                 <Row>
                     {this.renderSelect(groupBy)}
                 </Row>
-                <Chart rates={groupedRates} />
+                <Chart rates={groupedRates.slice()} />
                 <br />
                 {rates.length > 0 && this.renderTable(pair, groupedRates)}
             </div>

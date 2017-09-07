@@ -41,6 +41,11 @@ class PairActions extends BaseActions {
             this.dispatch({
                 type: 'PAIR_CREATE',
             });
+        }).catch((errors) => {
+            this.dispatch({
+                type: 'ERROR_OCCURED',
+                errors: JSON.parse(errors).errors,
+            });
         });
     }
 
@@ -49,6 +54,11 @@ class PairActions extends BaseActions {
             this.dispatch({
                 type: 'PAIR_UPDATE',
             });
+        }).catch((errors) => {
+            this.dispatch({
+                type: 'ERROR_OCCURED',
+                errors: JSON.parse(errors).errors,
+            });
         });
     }
 
@@ -56,6 +66,11 @@ class PairActions extends BaseActions {
         return PairService.deletePair(id).then(() => {
             this.dispatch({
                 type: 'PAIR_DELETE',
+            });
+        }).catch((errors) => {
+            this.dispatch({
+                type: 'ERROR_OCCURED',
+                errors: JSON.parse(errors).errors,
             });
         });
     }
