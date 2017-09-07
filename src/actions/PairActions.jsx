@@ -24,7 +24,9 @@ class PairActions extends BaseActions {
     }
 
     showEditForm(id) {
-        this.getPair(id);
+        if (id) {
+            this.getPair(id);
+        }
         this.dispatch({
             type: 'PAIR_EDIT_FORM_OPEN',
         });

@@ -4,6 +4,10 @@ import PairAction from '../../../actions/PairActions';
 
 class PairAddForm extends React.Component {
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.state !== nextState || this.props !== nextProps;
+    }
+
     handleSubmit() {
         this.setState({
             pending: true,

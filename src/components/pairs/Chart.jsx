@@ -12,6 +12,11 @@ const styles = {
 };
 
 class Chart extends React.Component {
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.state !== nextState || this.props !== nextProps;
+    }
+
     render() {
         const data = this.props.rates.reverse().map(rate => ({
             name: rate.date,

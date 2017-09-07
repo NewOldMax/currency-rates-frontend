@@ -48,7 +48,7 @@ class PairStore extends BasicStore {
                     this.emitChange();
                     break;
                 case 'PAIR_EDIT_FORM_CLOSE':
-                    this._editForm = true;
+                    this._editForm = false;
                     this.emitChange();
                     break;
                 case 'PAIR_HISTORICAL':

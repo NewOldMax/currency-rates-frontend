@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import { Row, Col, Table, Input, Label } from 'reactstrap';
 import classNames from 'classnames';
 import moment from 'moment';
+import EditIcon from 'react-icons/lib/md/edit';
 import PairAction from '../../actions/PairActions';
 import HeaderAction from '../../actions/HeaderActions';
 import PairStore from '../../stores/PairStore';
+import PairEditForm from '../forms/pairs/PairEditForm';
 import Chart from './Chart';
 
 const fields = [
@@ -22,6 +24,14 @@ const style = {
     value: {
         fontSize: '20px',
         fontWeight: 500,
+    },
+    icon: {
+        position: 'absolute',
+        right: '5%',
+        fontSize: '30px',
+        marginTop: '14px',
+        cursor: 'pointer',
+        zIndex: '3',
     },
 };
 
@@ -168,7 +178,10 @@ class PairPage extends React.Component {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        return this.state !== nextState || this.props !== nextProps;
+        return this.state.pair !== nextState.pair ||
+            this.state.rates !== nextState.rates ||
+            this.state.groupBy !== nextState.groupBy ||
+            this.props !== nextProps;
     }
 
     componentWillUnmount() {
@@ -240,6 +253,10 @@ class PairPage extends React.Component {
             <div>
                 <Row>
                     {this.renderPair(pair)}
+                    <EditIcon
+                        onClick={() => PairAction.showEditForm()}
+                        style={style.icon}
+                    />
                 </Row>
                 <br />
                 <Row>
@@ -248,6 +265,7 @@ class PairPage extends React.Component {
                 <Chart rates={groupedRates.slice()} />
                 <br />
                 {rates.length > 0 && this.renderTable(pair, groupedRates)}
+                <PairEditForm noReset />
             </div>
         );
     }

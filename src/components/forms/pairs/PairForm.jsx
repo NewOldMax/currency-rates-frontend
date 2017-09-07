@@ -39,6 +39,10 @@ class PairForm extends React.Component {
         }
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.state !== nextState || this.props !== nextProps;
+    }
+
     getFields() {
         const { pair, pending } = this.state;
         const { type } = this.props;
@@ -137,7 +141,9 @@ class PairForm extends React.Component {
 
     handleClose() {
         this.setState({ open: false });
-        PairAction.erasePair();
+        if (!this.props.noReset) {
+            PairAction.erasePair();
+        }
         PairAction.closeEditForm();
     }
 
@@ -149,7 +155,7 @@ class PairForm extends React.Component {
 
     render() {
         // eslint-disable-next-line
-        const { handleSubmit, modal, type, pair, ...rest } = this.props;
+        const { handleSubmit, modal, type, pair, noReset, ...rest } = this.props;
         const fields = this.getFields().map(field => <FormField key={field.name} field={field} />);
         let content = (
             <ValidatorForm
@@ -183,6 +189,7 @@ PairForm.propTypes = {
     type: PropTypes.oneOf(['create', 'update']).isRequired,
     modal: PropTypes.bool,
     pair: PropTypes.object,
+    noReset: PropTypes.bool,
 };
 
 PairForm.defaultProps = {

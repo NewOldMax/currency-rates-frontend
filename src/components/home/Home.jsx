@@ -8,6 +8,10 @@ export default class Home extends React.Component {
         HeaderAction.setTitle('Home');
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.state !== nextState || this.props !== nextProps;
+    }
+
     render() {
         return <div>Welcome! To start using this service go to <Link to="/pairs">Currency Pairs Page</Link></div>;
     }

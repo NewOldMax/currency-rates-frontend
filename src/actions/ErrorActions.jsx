@@ -9,7 +9,7 @@ class ErrorActions extends BaseActions {
         });
     }
 
-    clearError() {
+    clearErrors() {
         this.dispatch({
             type: 'ERROR_CLEAR',
         });

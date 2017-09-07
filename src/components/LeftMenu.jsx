@@ -43,6 +43,10 @@ const renderItems = items => items.map((item, i) => (
 
 class LeftMenu extends React.Component {
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.state !== nextState || this.props !== nextProps;
+    }
+
     render() {
         return (
             <Nav

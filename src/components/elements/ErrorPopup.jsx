@@ -36,6 +36,10 @@ class ErrorPopup extends React.Component {
         ErrorStore.addChangeListener(this._onChange);
     }
 
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.state !== nextState || this.props !== nextProps;
+    }
+
     componentWillUnmount() {
         ErrorStore.removeChangeListener(this._onChange);
     }
@@ -57,6 +61,9 @@ class ErrorPopup extends React.Component {
 
     render() {
         const { open, errors } = this.state;
+        if (!open) {
+            return null;
+        }
         const message = errors.length ? errors[0].detail : '';
         return (
             <div style={style.container}>
