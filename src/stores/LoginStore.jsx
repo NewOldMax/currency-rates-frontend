@@ -32,7 +32,6 @@ class LoginStore extends BasicStore {
                     this.stopLoading();
                     break;
                 case 'LOGIN_REFRESH_TOKEN':
-                    console.log(action.jwt);
                     this._jwt = action.jwt;
                     localStorage.setItem('jwt', action.jwt);
                     this.emitChange();
